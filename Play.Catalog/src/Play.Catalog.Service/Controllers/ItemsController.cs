@@ -9,12 +9,6 @@ namespace Play.Catalog.Service.Controllers;
 public class ItemsController : ControllerBase
 {
     private readonly ItemsRepository _itemsRepository = new();
-    private static List<ItemDto> items = new()
-        {
-            new ItemDto(Guid.NewGuid(),"Potion", "Restores a small amount of HP", 5, DateTimeOffset.UtcNow),
-            new ItemDto(Guid.NewGuid(),"AntiDote", "Cures poisn", 7, DateTimeOffset.UtcNow),
-            new ItemDto(Guid.NewGuid(),"Bronze sword", "Restores a small amount of damage", 20, DateTimeOffset.UtcNow)
-        };
 
     [HttpGet]
     public async Task<IEnumerable<ItemDto>> GetAsync()
@@ -36,14 +30,14 @@ public class ItemsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ItemDto>> PostAsync(CreateItemDto createItemDto)
     {
+
         var item = new Item
         {
             Id = Guid.NewGuid(),
-
             Name = createItemDto.Name,
             Description = createItemDto.Description,
             Price = createItemDto.Price,
-            CreatedDate = DateTimeOffset.UtcNow
+            CreatedDate = DateTimeOffset.Now
         };
         await _itemsRepository.CreateAsync(item);
         return CreatedAtAction(nameof(GetByIdAsync), new { id = item.Id }, item);

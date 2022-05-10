@@ -23,6 +23,27 @@ public class ItemsRepository
     {
         FilterDefinition<Item> filter = filterBuilder.Eq(entity => entity.Id, id);
         return await dbCollection.Find(filter).FirstOrDefaultAsync();
-
+    }
+    public async Task CreateAsync(Item entity)
+    {
+        if (entity == null)
+        {
+            throw new ArgumentNullException(nameof(entity));
+        }
+        await dbCollection.InsertOneAsync(entity);
+    }
+    public async Task UpdateAsync(Item entity)
+    {
+        if (entity == null)
+        {
+            throw new ArgumentNullException(nameof(entity));
+        }
+        FilterDefinition<Item> filter = filterBuilder.Eq(e => e.Id, entity.Id);
+        await dbCollection.ReplaceOneAsync(filter, entity);
+    }
+    public async Task RemoveAsync(Guid id)
+    {
+        FilterDefinition<Item> filter = filterBuilder.Eq(entity => entity.Id, id);
+        await dbCollection.DeleteOneAsync(filter);
     }
 }

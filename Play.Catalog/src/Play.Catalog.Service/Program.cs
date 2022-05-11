@@ -1,10 +1,23 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Driver;
+using Play.Catalog.Servic.Repositories;
+using Play.Catalog.Service.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
+ServiceSettings serviceSettings = configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
+MongoDbSettings mongoDbSettings = configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
+
+builder.Services.AddSingleton(serviceProvider =>
+{
+    var mongoClient = new MongoClient(mongoDbSettings.ConnectionString);
+    return mongoClient.GetDatabase(serviceSettings.Servicename);
+});
+builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
 
 BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
 BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));

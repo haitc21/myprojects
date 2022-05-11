@@ -8,7 +8,11 @@ namespace Play.Catalog.Service.Controllers;
 [Route("Items")]
 public class ItemsController : ControllerBase
 {
-    private readonly ItemsRepository _itemsRepository = new();
+    private readonly IItemsRepository _itemsRepository;
+    public ItemsController(IItemsRepository itemsRepository)
+    {
+        _itemsRepository = itemsRepository;
+    }
 
     [HttpGet]
     public async Task<IEnumerable<ItemDto>> GetAsync()
@@ -20,6 +24,7 @@ public class ItemsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<ItemDto>> GetByIdAsync(Guid id)
     {
+        string idS = id.ToString();
         var result = await _itemsRepository.GetAsync(id);
         if (result == null)
         {

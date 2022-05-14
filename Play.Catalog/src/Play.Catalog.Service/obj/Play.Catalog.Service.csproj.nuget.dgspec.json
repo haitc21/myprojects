@@ -10,14 +10,11 @@
         "projectUniqueName": "C:\\CongViec\\myprojects\\Play.Catalog\\src\\Play.Catalog.Service\\Play.Catalog.Service.csproj",
         "projectName": "Play.Catalog.Service",
         "projectPath": "C:\\CongViec\\myprojects\\Play.Catalog\\src\\Play.Catalog.Service\\Play.Catalog.Service.csproj",
-        "packagesPath": "C:\\Users\\haitc-des\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\haitc\\.nuget\\packages\\",
         "outputPath": "C:\\CongViec\\myprojects\\Play.Catalog\\src\\Play.Catalog.Service\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\haitc-des\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\haitc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -70,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -2,8 +2,9 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
-using Play.Catalog.Servic.Repositories;
+using Play.Catalog.Service.Repositories;
 using Play.Catalog.Service.Settings;
+using Play.Catalog.Service.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -17,7 +18,11 @@ builder.Services.AddSingleton(serviceProvider =>
     var mongoClient = new MongoClient(mongoDbSettings.ConnectionString);
     return mongoClient.GetDatabase(serviceSettings.Servicename);
 });
-builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
+builder.Services.AddSingleton<IRepository<Item>>(serviceProvider =>
+{
+    var database = serviceProvider.GetService<IMongoDatabase>();
+    return new MongoRepository<Item>(database, "Items");
+});
 
 BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
 BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));

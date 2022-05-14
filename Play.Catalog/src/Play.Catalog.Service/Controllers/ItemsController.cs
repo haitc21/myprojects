@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
-using Play.Catalog.Servic.Repositories;
+using Play.Catalog.Service.Repositories;
 using Play.Catalog.Service.Dtos;
-using Play.Catalog.Servic.Entities;
+using Play.Catalog.Service.Entities;
 
 namespace Play.Catalog.Service.Controllers;
 [ApiController]
 [Route("Items")]
 public class ItemsController : ControllerBase
 {
-    private readonly IItemsRepository _itemsRepository;
-    public ItemsController(IItemsRepository itemsRepository)
+    private readonly IRepository<Item> _itemsRepository;
+    public ItemsController(IRepository<Item> itemsRepository)
     {
         _itemsRepository = itemsRepository;
     }

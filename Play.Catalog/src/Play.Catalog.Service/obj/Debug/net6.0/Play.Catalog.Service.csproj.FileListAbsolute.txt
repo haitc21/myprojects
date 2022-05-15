@@ -41,3 +41,5 @@ C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net6.0\ru
 C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
 C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
 C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Service\bin\Debug\net6.0\Play.Common.dll

@@ -1,0 +1,6 @@
+# Đóng gói thư viện => file .nupkg
+dotnet pack -o C:\CongViec\myprojects\Play.Packages
+# tạo nuget package từ file .nupkg
+dotnet nuget adđ source C:\CongViec\myprojects\Play.Packages -n PlayEconomy
+# cài đặt nuget package tự tạo vào project
+dotnet add package Play.Common

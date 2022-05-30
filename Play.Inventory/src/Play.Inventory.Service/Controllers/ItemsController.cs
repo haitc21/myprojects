@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Play.Common.Repositories;
+using Play.Inventory.Service.Clients;
 using Play.Inventory.Service.Dtos;
 using Play.Inventory.Service.Entities;
 using Play.Inventory.Services;
@@ -11,9 +12,11 @@ namespace Play.Inventory.Service.Controllers;
 public class ItemsController : ControllerBase
 {
     private readonly IRepository<InventoryItem> _inventoryRepository;
-    public ItemsController(IRepository<InventoryItem> inventoryRepository)
+    private readonly CatalogClient _catalogClient;
+    public ItemsController(IRepository<InventoryItem> inventoryRepository, CatalogClient catalogClient)
     {
         _inventoryRepository = inventoryRepository;
+        _catalogClient = catalogClient;
     }
 
     [HttpGet]
@@ -23,9 +26,14 @@ public class ItemsController : ControllerBase
         {
             return BadRequest();
         }
-        var item = (await _inventoryRepository.GetAllAsync(x => x.UserId == userId))
-                    .Select(x => x.AsDto());
-        return Ok(item);
+        var catalogItems = await _catalogClient.GetCatalogItemsAsync();
+        var inventoryItemEntities = await _inventoryRepository.GetAllAsync(x => x.UserId == userId);
+        var iventoryItemDtos = inventoryItemEntities.Select(entity =>
+        {
+            var catalogItem = catalogItems.SingleOrDefault(x => x.Id == entity.CatalogItemId);
+            return entity.AsDto(catalogItem.Name, catalogItem.Description);
+        });
+        return Ok(iventoryItemDtos);
     }
     [HttpPost]
     public async Task<ActionResult> PostAsync(GrantItemsDto grantItemsDto)
@@ -46,7 +54,7 @@ public class ItemsController : ControllerBase
         }
         else
         {
-            inventoryitem.Quantity = grantItemsDto.Quantity;
+            inventoryitem.Quantity += grantItemsDto.Quantity;
             await _inventoryRepository.UpdateAsync(inventoryitem);
         }
         return Ok();

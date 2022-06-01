@@ -9,7 +9,7 @@ namespace Play.Catalog.Service.Controllers;
 public class ItemsController : ControllerBase
 {
     private readonly IRepository<Item> _itemsRepository;
-    private int requestCounter = 0;
+    private static int requestCounter = 0;
     public ItemsController(IRepository<Item> itemsRepository)
     {
         _itemsRepository = itemsRepository;

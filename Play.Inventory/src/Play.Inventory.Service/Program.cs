@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 Random jitterer = new Random();
 builder.Services.AddMongo()
         .AddMongoRepository<InventoryItem>("InventoryItems");
+
 builder.Services.AddHttpClient<CatalogClient>(client =>
 {
     client.BaseAddress = new Uri("https://localhost:7158");
@@ -18,11 +19,28 @@ builder.Services.AddHttpClient<CatalogClient>(client =>
 .AddTransientHttpErrorPolicy(b => b.Or<TimeoutRejectedException>().WaitAndRetryAsync(
     5,
     retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
-                  +  TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)),
-    onRetry: (outcome, timespan, retryAttempts) => {
+                  + TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)),
+    onRetry: (outcome, timespan, retryAttempts) =>
+    {
         var serviceProvider = builder.Services.BuildServiceProvider();
         serviceProvider.GetService<ILogger<CatalogClient>>()?
         .LogWarning($"delay for {timespan.TotalSeconds} seconds, then making retry {retryAttempts}");
+    }
+))
+.AddTransientHttpErrorPolicy(b => b.Or<TimeoutRejectedException>().CircuitBreakerAsync(
+    3,
+    TimeSpan.FromSeconds(15),
+    onBreak: (outcome, timespan) =>
+    {
+        var serviceProvider = builder.Services.BuildServiceProvider();
+        serviceProvider.GetService<ILogger<CatalogClient>>()?
+        .LogWarning($"Opening the circuit for {timespan.TotalSeconds} seconds");
+    },
+    onReset: () =>
+    {
+        var serviceProvider = builder.Services.BuildServiceProvider();
+        serviceProvider.GetService<ILogger<CatalogClient>>()?
+        .LogWarning($"Closing the circuit");
     }
 ))
 .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(1));

@@ -1,0 +1,12 @@
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\bin\Debug\net6.0\Play.Catalog.Contracts.deps.json
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\bin\Debug\net6.0\Play.Catalog.Contracts.dll
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\bin\Debug\net6.0\Play.Catalog.Contracts.pdb
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\obj\Debug\net6.0\Play.Catalog.Contracts.csproj.AssemblyReference.cache
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\obj\Debug\net6.0\Play.Catalog.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\obj\Debug\net6.0\Play.Catalog.Contracts.AssemblyInfoInputs.cache
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\obj\Debug\net6.0\Play.Catalog.Contracts.AssemblyInfo.cs
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\obj\Debug\net6.0\Play.Catalog.Contracts.csproj.CoreCompileInputs.cache
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\obj\Debug\net6.0\Play.Catalog.Contracts.dll
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\obj\Debug\net6.0\refint\Play.Catalog.Contracts.dll
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\obj\Debug\net6.0\Play.Catalog.Contracts.pdb
+C:\CongViec\myprojects\Play.Catalog\src\Play.Catalog.Contracts\obj\Debug\net6.0\ref\Play.Catalog.Contracts.dll

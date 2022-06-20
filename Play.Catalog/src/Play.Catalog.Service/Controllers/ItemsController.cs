@@ -1,4 +1,6 @@
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Play.Catalog.Contracts;
 using Play.Catalog.Service.Dtos;
 using Play.Catalog.Service.Entities;
 using Play.Common.Repositories;
@@ -9,30 +11,19 @@ namespace Play.Catalog.Service.Controllers;
 public class ItemsController : ControllerBase
 {
     private readonly IRepository<Item> _itemsRepository;
-    private static int requestCounter = 0;
-    public ItemsController(IRepository<Item> itemsRepository)
+    private readonly IPublishEndpoint _publishEndpoint;
+    public ItemsController(IRepository<Item> itemsRepository, IPublishEndpoint publishEndpoint)
     {
         _itemsRepository = itemsRepository;
+        _publishEndpoint = publishEndpoint;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ItemDto>>> GetAsync()
     {
-        requestCounter++;
-        Console.WriteLine($"Request {requestCounter} strating...");
-        if (requestCounter <= 2)
-        {
-            Console.WriteLine($"Request {requestCounter} delaying...");
-            await Task.Delay(TimeSpan.FromSeconds(10));
-        }
-        if (requestCounter <= 4)
-        {
-            Console.WriteLine($"Request {requestCounter} 500 errpr");
-            return StatusCode(500);
-        }
+
         var items = (await _itemsRepository.GetAllAsync())
                   .Select(x => x.AsDto());
-        Console.WriteLine($"Request {requestCounter} Ok");
         return Ok(items);
     }
     [HttpGet("{id}")]
@@ -59,6 +50,7 @@ public class ItemsController : ControllerBase
             CreatedDate = DateTimeOffset.Now
         };
         await _itemsRepository.CreateAsync(item);
+        await _publishEndpoint.Publish(new CatalogItemCreated(item.Id, item.Name, item.Description));
         return CreatedAtAction(nameof(GetByIdAsync), new { id = item.Id }, item);
     }
 
@@ -74,6 +66,8 @@ public class ItemsController : ControllerBase
         existingItem.Description = updateItemDto.Description;
         existingItem.Price = updateItemDto.Price;
         await _itemsRepository.UpdateAsync(existingItem);
+
+        await _publishEndpoint.Publish(new CatalogItemUpdated(existingItem.Id, existingItem.Name, existingItem.Description));
         return NoContent();
     }
     [HttpDelete("{id}")]
@@ -85,6 +79,7 @@ public class ItemsController : ControllerBase
             return NotFound();
         }
         await _itemsRepository.RemoveAsync(id);
+        await _publishEndpoint.Publish(new CatalogItemDeleted(id));
         return NoContent();
     }
 }

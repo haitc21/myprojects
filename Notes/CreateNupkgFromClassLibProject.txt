@@ -1,0 +1,9 @@
+# Đóng gói thư viện => file .nupkg
+dotnet pack -o ..\..\..\Packages
+# tạo nuget package từ file .nupkg
+# PlayEconomy là tên bộ thư viện. Vào Nuget Packages Management trong Visuo Studio để kiểm tra
+dotnet nuget adđ source ..\..\..\Packages -n PlayEconomy
+# cài đặt nuget package tự tạo vào project
+dotnet add package Play.Common
+# Nâng cấp version mới cho package
+ dotnet pack -p:PackageVersion=1.0.1  -o ..\..\..\Packages

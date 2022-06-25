@@ -1,0 +1,2 @@
+docker run -d --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo
+# Nên sử dụng docker-compose trong folder Play.Infra

@@ -5,50 +5,56 @@ using Polly;
 using Polly.Timeout;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
+var services = builder.Services;
 
 // Add services to the container.
 
 Random jitterer = new Random();
-builder.Services.AddMongo()
+services.AddMongo()
         .AddMongoRepository<InventoryItem>("InventoryItems");
 
-builder.Services.AddHttpClient<CatalogClient>(client =>
+// Cấu hình HttpClient Play.Catalog
+// Sử dụng package Microsoft.Extensions.Http.Polly
+services.AddHttpClient<CatalogClient>(client =>
 {
     client.BaseAddress = new Uri("https://localhost:7158");
 })
+// Cấu hình retry request. WaitAndRetryAsync
 .AddTransientHttpErrorPolicy(b => b.Or<TimeoutRejectedException>().WaitAndRetryAsync(
     5,
     retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
                   + TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)),
     onRetry: (outcome, timespan, retryAttempts) =>
     {
-        var serviceProvider = builder.Services.BuildServiceProvider();
+        var serviceProvider = services.BuildServiceProvider();
         serviceProvider.GetService<ILogger<CatalogClient>>()?
         .LogWarning($"delay for {timespan.TotalSeconds} seconds, then making retry {retryAttempts}");
     }
 ))
+// circuit breaker partern
 .AddTransientHttpErrorPolicy(b => b.Or<TimeoutRejectedException>().CircuitBreakerAsync(
     3,
     TimeSpan.FromSeconds(15),
     onBreak: (outcome, timespan) =>
     {
-        var serviceProvider = builder.Services.BuildServiceProvider();
+        var serviceProvider = services.BuildServiceProvider();
         serviceProvider.GetService<ILogger<CatalogClient>>()?
         .LogWarning($"Opening the circuit for {timespan.TotalSeconds} seconds");
     },
     onReset: () =>
     {
-        var serviceProvider = builder.Services.BuildServiceProvider();
+        var serviceProvider = services.BuildServiceProvider();
         serviceProvider.GetService<ILogger<CatalogClient>>()?
         .LogWarning($"Closing the circuit");
     }
 ))
 .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(1));
 
-builder.Services.AddControllers();
+services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
 
 var app = builder.Build();
 

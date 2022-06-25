@@ -11,6 +11,7 @@ var serviceSettings = configuration.GetSection(nameof(ServiceSettings)).Get<Serv
 // Add services to the container.
 builder.Services.AddMongo()
         .AddMongoRepository<Item>("Items");
+        
 builder.Services.AddMassTransit(x =>
 {
     x.UsingRabbitMq((context, config) =>

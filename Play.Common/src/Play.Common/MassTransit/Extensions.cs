@@ -14,14 +14,17 @@ public static class Extensions
             configure.AddConsumers(Assembly.GetEntryAssembly());
 
             configure.UsingRabbitMq((context, config) =>
-
             {
                 var configuration = context.GetService<IConfiguration>();
                 ServiceSettings serviceSettings = configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
                 var rabbitMqSettings = configuration.GetSection(nameof(RabbitMQSettings)).Get<RabbitMQSettings>();
                 config.Host(rabbitMqSettings.Host);
                 config.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(serviceSettings.Servicename, false));
-
+                // https://masstransit-project.com/usage/exceptions.html#retry
+                config.UseMessageRetry(retryConfig =>
+                {
+                    retryConfig.Interval(3, TimeSpan.FromSeconds(5));
+                });
             });
         });
 

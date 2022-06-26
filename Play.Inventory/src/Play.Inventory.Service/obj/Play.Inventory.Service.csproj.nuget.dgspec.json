@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\CongViec\\myprojects\\Play.Inventory\\src\\Play.Inventory.Service\\Play.Inventory.Service.csproj": {}
+    "c:\\CongViec\\myprojects\\Play.Inventory\\src\\Play.Inventory.Service\\Play.Inventory.Service.csproj": {}
   },
   "projects": {
-    "C:\\CongViec\\myprojects\\Play.Inventory\\src\\Play.Inventory.Service\\Play.Inventory.Service.csproj": {
+    "c:\\CongViec\\myprojects\\Play.Inventory\\src\\Play.Inventory.Service\\Play.Inventory.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\CongViec\\myprojects\\Play.Inventory\\src\\Play.Inventory.Service\\Play.Inventory.Service.csproj",
+        "projectUniqueName": "c:\\CongViec\\myprojects\\Play.Inventory\\src\\Play.Inventory.Service\\Play.Inventory.Service.csproj",
         "projectName": "Play.Inventory.Service",
-        "projectPath": "C:\\CongViec\\myprojects\\Play.Inventory\\src\\Play.Inventory.Service\\Play.Inventory.Service.csproj",
+        "projectPath": "c:\\CongViec\\myprojects\\Play.Inventory\\src\\Play.Inventory.Service\\Play.Inventory.Service.csproj",
         "packagesPath": "C:\\Users\\haitc\\.nuget\\packages\\",
-        "outputPath": "C:\\CongViec\\myprojects\\Play.Inventory\\src\\Play.Inventory.Service\\obj\\",
+        "outputPath": "c:\\CongViec\\myprojects\\Play.Inventory\\src\\Play.Inventory.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\haitc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -52,7 +52,7 @@
             },
             "Play.Common": {
               "target": "Package",
-              "version": "[1.0.1, )"
+              "version": "[1.0.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

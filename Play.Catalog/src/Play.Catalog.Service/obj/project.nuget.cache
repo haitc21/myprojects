@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "W5vcVsPjMtoUPRypj1E1sAKDHc2dEHF+jHvSmtvzmmiNP/E008I4JSLf0RLWqbNd57w5ivs1TeP6cfyb/qSnFQ==",
+  "dgSpecHash": "4a2ktQEDXFDgRBIuNqJEt83W5TlYc8Gj2Xzj18pT9el/nEpditrqvGv4wsYSwt2AxgMEVTNtIXKpONNXiMMRrg==",
   "success": true,
-  "projectFilePath": "C:\\CongViec\\myprojects\\Play.Catalog\\src\\Play.Catalog.Service\\Play.Catalog.Service.csproj",
+  "projectFilePath": "c:\\CongViec\\myprojects\\Play.Catalog\\src\\Play.Catalog.Service\\Play.Catalog.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\haitc\\.nuget\\packages\\dnsclient\\1.6.0\\dnsclient.1.6.0.nupkg.sha512",
     "C:\\Users\\haitc\\.nuget\\packages\\masstransit\\8.0.3\\masstransit.8.0.3.nupkg.sha512",
@@ -30,7 +30,7 @@
     "C:\\Users\\haitc\\.nuget\\packages\\mongodb.driver\\2.15.1\\mongodb.driver.2.15.1.nupkg.sha512",
     "C:\\Users\\haitc\\.nuget\\packages\\mongodb.driver.core\\2.15.1\\mongodb.driver.core.2.15.1.nupkg.sha512",
     "C:\\Users\\haitc\\.nuget\\packages\\mongodb.libmongocrypt\\1.3.0\\mongodb.libmongocrypt.1.3.0.nupkg.sha512",
-    "C:\\Users\\haitc\\.nuget\\packages\\play.common\\1.0.1\\play.common.1.0.1.nupkg.sha512",
+    "C:\\Users\\haitc\\.nuget\\packages\\play.common\\1.0.2\\play.common.1.0.2.nupkg.sha512",
     "C:\\Users\\haitc\\.nuget\\packages\\rabbitmq.client\\6.2.4\\rabbitmq.client.6.2.4.nupkg.sha512",
     "C:\\Users\\haitc\\.nuget\\packages\\sharpcompress\\0.30.1\\sharpcompress.0.30.1.nupkg.sha512",
     "C:\\Users\\haitc\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
@@ -47,7 +47,8 @@
     "C:\\Users\\haitc\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
     "C:\\Users\\haitc\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\haitc\\.nuget\\packages\\system.text.json\\6.0.2\\system.text.json.6.0.2.nupkg.sha512",
-    "C:\\Users\\haitc\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
+    "C:\\Users\\haitc\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
+    "C:\\Users\\haitc\\.nuget\\packages\\play.catalog.contracts\\1.0.0\\play.catalog.contracts.1.0.0.nupkg.sha512"
   ],
   "logs": []
 }
